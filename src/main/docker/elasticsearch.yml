@@ -1,0 +1,10 @@
+version: '2'
+services:
+    raitamitra-elasticsearch:
+        container_name: raitamitra-elasticsearch
+        image: elasticsearch:2.4.0
+        # volumes:
+        #     - ~/volumes/jhipster/raitamitra/elasticsearch/:/usr/share/elasticsearch/data/
+        ports:
+            - 9200:9200
+            - 9300:9300
