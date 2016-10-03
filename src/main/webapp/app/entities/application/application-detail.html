@@ -1,0 +1,116 @@
+
+<div>
+    <h2><span>Application</span> {{vm.application.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>App Date</span></dt>
+        <dd>
+            <span>{{vm.application.appDate | date:'medium'}}</span>
+        </dd>
+        <dt><span>First Name</span></dt>
+        <dd>
+            <span>{{vm.application.firstName}}</span>
+        </dd>
+        <dt><span>Last Name</span></dt>
+        <dd>
+            <span>{{vm.application.lastName}}</span>
+        </dd>
+        <dt><span>Applicant Photo</span></dt>
+        <dd>
+            <div ng-if="vm.application.applicantPhoto">
+                <a ng-click="vm.openFile(vm.application.applicantPhotoContentType, vm.application.applicantPhoto)">
+                    <img data-ng-src="{{'data:' + vm.application.applicantPhotoContentType + ';base64,' + vm.application.applicantPhoto}}" style="max-width: 100%;"/>
+                </a>
+                {{vm.application.applicantPhotoContentType}}, {{vm.byteSize(vm.application.applicantPhoto)}}
+            </div>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+            <span>{{vm.application.email}}</span>
+        </dd>
+        <dt><span>Phone</span></dt>
+        <dd>
+            <span>{{vm.application.phone}}</span>
+        </dd>
+        <dt><span>Father Or Husband Name</span></dt>
+        <dd>
+            <span>{{vm.application.fatherOrHusbandName}}</span>
+        </dd>
+        <dt><span>Servey Number</span></dt>
+        <dd>
+            <span>{{vm.application.serveyNumber}}</span>
+        </dd>
+        <dt><span>Farmer Type</span></dt>
+        <dd>
+            <span>{{vm.application.farmerType}}</span>
+        </dd>
+        <dt><span>Crop</span></dt>
+        <dd>
+            <span>{{vm.application.crop}}</span>
+        </dd>
+        <dt><span>Source Of Water</span></dt>
+        <dd>
+            <span>{{vm.application.sourceOfWater}}</span>
+        </dd>
+        <dt><span>Benefit Needed</span></dt>
+        <dd>
+            <span>{{vm.application.benefitNeeded}}</span>
+        </dd>
+        <dt><span>Company Name</span></dt>
+        <dd>
+            <span>{{vm.application.companyName}}</span>
+        </dd>
+        <dt><span>Account No</span></dt>
+        <dd>
+            <span>{{vm.application.accountNo}}</span>
+        </dd>
+        <dt><span>Bank Name</span></dt>
+        <dd>
+            <span>{{vm.application.bankName}}</span>
+        </dd>
+        <dt><span>Docs Verified</span></dt>
+        <dd>
+            <span>{{vm.application.docsVerified}}</span>
+        </dd>
+        <dt><span>Attachments</span></dt>
+        <dd>
+            <span>{{vm.application.attachments}}</span>
+        </dd>
+        <dt><span>Notes</span></dt>
+        <dd>
+            <span>{{vm.application.notes}}</span>
+        </dd>
+        <dt><span>District</span></dt>
+        <dd>
+            <a ui-sref="district-detail({id:vm.application.district.id})">{{vm.application.district.name}}</a>
+        </dd>
+        <dt><span>Taluka</span></dt>
+        <dd>
+            <a ui-sref="taluka-detail({id:vm.application.taluka.id})">{{vm.application.taluka.name}}</a>
+        </dd>
+        <dt><span>Hobli</span></dt>
+        <dd>
+            <a ui-sref="hobli-detail({id:vm.application.hobli.id})">{{vm.application.hobli.name}}</a>
+        </dd>
+        <dt><span>Village</span></dt>
+        <dd>
+            <a ui-sref="village-detail({id:vm.application.village.id})">{{vm.application.village.name}}</a>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+            <a ui-sref="status-detail({id:vm.application.status.id})">{{vm.application.status.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="application-detail.edit({id:vm.application.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

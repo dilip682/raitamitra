@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Application.
+    -->
+    <changeSet id="20161003033207-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="district_id"
+                                 baseTableName="application"
+                                 constraintName="fk_application_district_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="district"/>
+
+        <addForeignKeyConstraint baseColumnNames="taluka_id"
+                                 baseTableName="application"
+                                 constraintName="fk_application_taluka_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="taluka"/>
+
+        <addForeignKeyConstraint baseColumnNames="hobli_id"
+                                 baseTableName="application"
+                                 constraintName="fk_application_hobli_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hobli"/>
+
+        <addForeignKeyConstraint baseColumnNames="village_id"
+                                 baseTableName="application"
+                                 constraintName="fk_application_village_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="village"/>
+
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="application"
+                                 constraintName="fk_application_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="status"/>
+
+    </changeSet>
+</databaseChangeLog>

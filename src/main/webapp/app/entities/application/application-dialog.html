@@ -1,0 +1,286 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myApplicationLabel">Create or edit a Application</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.application.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.application.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_appDate">App Date</label>
+                <div class="input-group">
+                    <input id="field_appDate" type="text" class="form-control" name="appDate" datetime-picker="{{dateformat}}" ng-model="vm.application.appDate" is-open="vm.datePickerOpenStatus.appDate"
+                    required  />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('appDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.appDate.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.appDate.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.appDate.$error.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_firstName">First Name</label>
+            <input type="text" class="form-control" name="firstName" id="field_firstName"
+                    ng-model="vm.application.firstName"
+                    required ng-minlength="1" />
+            <div ng-show="editForm.firstName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.firstName.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.firstName.$error.minlength" translate-value-min="1">
+                    This field is required to be at least 1 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lastName">Last Name</label>
+            <input type="text" class="form-control" name="lastName" id="field_lastName"
+                    ng-model="vm.application.lastName"
+                    required ng-minlength="1" />
+            <div ng-show="editForm.lastName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.lastName.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.lastName.$error.minlength" translate-value-min="1">
+                    This field is required to be at least 1 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setApplicantPhoto($file, vm.application)" ngf-pattern="'image/*'">
+            <label class="control-label" for="field_applicantPhoto">Applicant Photo</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.application.applicantPhotoContentType + ';base64,' + vm.application.applicantPhoto}}" style="max-height: 100px;" ng-if="vm.application.applicantPhoto"/>
+                <div ng-if="vm.application.applicantPhoto" class="help-block clearfix">
+                    <span class="pull-left">{{vm.application.applicantPhotoContentType}}, {{vm.byteSize(vm.application.applicantPhoto)}}</span>
+                    <button ng-click="vm.application.applicantPhoto=null;vm.application.applicantPhotoContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="file" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setApplicantPhoto($file, vm.application)" accept="image/*">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="applicantPhoto" id="field_applicantPhoto"
+                    ng-model="vm.application.applicantPhoto"
+                     />
+            <input type="hidden" class="form-control" name="applicantPhotoContentType" id="field_applicantPhotoContentType"
+                    ng-model="vm.application.applicantPhotoContentType" />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                    ng-model="vm.application.email"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_phone">Phone</label>
+            <input type="text" class="form-control" name="phone" id="field_phone"
+                    ng-model="vm.application.phone"
+                    required ng-minlength="8" />
+            <div ng-show="editForm.phone.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.phone.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.phone.$error.minlength" translate-value-min="8">
+                    This field is required to be at least 8 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_fatherOrHusbandName">Father Or Husband Name</label>
+            <input type="text" class="form-control" name="fatherOrHusbandName" id="field_fatherOrHusbandName"
+                    ng-model="vm.application.fatherOrHusbandName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_serveyNumber">Servey Number</label>
+            <input type="text" class="form-control" name="serveyNumber" id="field_serveyNumber"
+                    ng-model="vm.application.serveyNumber"
+                    required />
+            <div ng-show="editForm.serveyNumber.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.serveyNumber.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_farmerType">Farmer Type</label>
+            <select class="form-control" name="farmerType" ng-model="vm.application.farmerType" id="field_farmerType" required>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+            </select>
+            <div ng-show="editForm.farmerType.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.farmerType.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_crop">Crop</label>
+            <input type="text" class="form-control" name="crop" id="field_crop"
+                    ng-model="vm.application.crop"
+                    required />
+            <div ng-show="editForm.crop.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.crop.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_sourceOfWater">Source Of Water</label>
+            <input type="text" class="form-control" name="sourceOfWater" id="field_sourceOfWater"
+                    ng-model="vm.application.sourceOfWater"
+                    required />
+            <div ng-show="editForm.sourceOfWater.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.sourceOfWater.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_benefitNeeded">Benefit Needed</label>
+            <input type="text" class="form-control" name="benefitNeeded" id="field_benefitNeeded"
+                    ng-model="vm.application.benefitNeeded"
+                    required />
+            <div ng-show="editForm.benefitNeeded.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.benefitNeeded.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_companyName">Company Name</label>
+            <input type="text" class="form-control" name="companyName" id="field_companyName"
+                    ng-model="vm.application.companyName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_accountNo">Account No</label>
+            <input type="text" class="form-control" name="accountNo" id="field_accountNo"
+                    ng-model="vm.application.accountNo"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_bankName">Bank Name</label>
+            <input type="text" class="form-control" name="bankName" id="field_bankName"
+                    ng-model="vm.application.bankName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_docsVerified">Docs Verified</label>
+            <input type="checkbox" class="form-control" name="docsVerified" id="field_docsVerified"
+                    ng-model="vm.application.docsVerified"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_attachments">Attachments</label>
+            <input type="text" class="form-control" name="attachments" id="field_attachments"
+                    ng-model="vm.application.attachments"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_notes">Notes</label>
+            <input type="text" class="form-control" name="notes" id="field_notes"
+                    ng-model="vm.application.notes"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_district">District</label>
+            <select class="form-control" id="field_district" name="district" ng-model="vm.application.district" ng-options="district as district.name for district in vm.districts track by district.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.district.$invalid">
+            <p class="help-block"
+                ng-show="editForm.district.$error.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="field_taluka">Taluka</label>
+            <select class="form-control" id="field_taluka" name="taluka" ng-model="vm.application.taluka" ng-options="taluka as taluka.name for taluka in vm.talukas track by taluka.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.taluka.$invalid">
+            <p class="help-block"
+                ng-show="editForm.taluka.$error.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="field_hobli">Hobli</label>
+            <select class="form-control" id="field_hobli" name="hobli" ng-model="vm.application.hobli" ng-options="hobli as hobli.name for hobli in vm.hoblis track by hobli.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.hobli.$invalid">
+            <p class="help-block"
+                ng-show="editForm.hobli.$error.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="field_village">Village</label>
+            <select class="form-control" id="field_village" name="village" ng-model="vm.application.village" ng-options="village as village.name for village in vm.villages track by village.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.village.$invalid">
+            <p class="help-block"
+                ng-show="editForm.village.$error.required">
+                This field is required.
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="field_status">Status</label>
+            <select class="form-control" id="field_status" name="status" ng-model="vm.application.status" ng-options="status as status.name for status in vm.statuses track by status.id" required>
+                <option value=""></option>
+            </select>
+        </div>
+        <div ng-show="editForm.status.$invalid">
+            <p class="help-block"
+                ng-show="editForm.status.$error.required">
+                This field is required.
+            </p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

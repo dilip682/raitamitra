@@ -37,5 +37,29 @@
            timeToLiveSeconds="3600">
     </cache>
     
+    <cache name="com.raitamitra.app.domain.Application"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.raitamitra.app.domain.District"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.raitamitra.app.domain.Taluka"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.raitamitra.app.domain.Village"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.raitamitra.app.domain.Hobli"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="com.raitamitra.app.domain.Status"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
     <!-- jhipster-needle-ehcache-add-entry -->
 </ehcache>

@@ -1,0 +1,132 @@
+<div>
+    <h2>Applications</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="application.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs" >
+                        Create new Application
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Query">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="appDate"><span>App Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="firstName"><span>First Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastName"><span>Last Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="applicantPhoto"><span>Applicant Photo</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="email"><span>Email</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="phone"><span>Phone</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fatherOrHusbandName"><span>Father Or Husband Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="serveyNumber"><span>Servey Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="farmerType"><span>Farmer Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="crop"><span>Crop</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sourceOfWater"><span>Source Of Water</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="benefitNeeded"><span>Benefit Needed</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="companyName"><span>Company Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="accountNo"><span>Account No</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="bankName"><span>Bank Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="docsVerified"><span>Docs Verified</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="attachments"><span>Attachments</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="notes"><span>Notes</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="district.name"><span>District</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="taluka.name"><span>Taluka</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="hobli.name"><span>Hobli</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="village.name"><span>Village</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status.name"><span>Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+                <tr ng-repeat="application in vm.applications track by application.id">
+                    <td><a ui-sref="application-detail({id:application.id})">{{application.id}}</a></td>
+                    <td>{{application.appDate | date:'medium'}}</td>
+                    <td>{{application.firstName}}</td>
+                    <td>{{application.lastName}}</td>
+                    <td>
+                        <a ng-if="application.applicantPhoto" ng-click="vm.openFile(application.applicantPhotoContentType, application.applicantPhoto)">
+                            <img data-ng-src="{{'data:' + application.applicantPhotoContentType + ';base64,' + application.applicantPhoto}}" style="max-height: 30px;"/>
+                        </a>
+                        <span ng-if="application.applicantPhoto">{{application.applicantPhotoContentType}}, {{vm.byteSize(application.applicantPhoto)}}</span>
+                    </td>
+                    <td>{{application.email}}</td>
+                    <td>{{application.phone}}</td>
+                    <td>{{application.fatherOrHusbandName}}</td>
+                    <td>{{application.serveyNumber}}</td>
+                    <td>{{application.farmerType}}</td>
+                    <td>{{application.crop}}</td>
+                    <td>{{application.sourceOfWater}}</td>
+                    <td>{{application.benefitNeeded}}</td>
+                    <td>{{application.companyName}}</td>
+                    <td>{{application.accountNo}}</td>
+                    <td>{{application.bankName}}</td>
+                    <td>{{application.docsVerified}}</td>
+                    <td>{{application.attachments}}</td>
+                    <td>{{application.notes}}</td>
+                    <td>
+                        <a ui-sref="district-detail({id:application.district.id})">{{application.district.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="taluka-detail({id:application.taluka.id})">{{application.taluka.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="hobli-detail({id:application.hobli.id})">{{application.hobli.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="village-detail({id:application.village.id})">{{application.village.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="status-detail({id:application.status.id})">{{application.status.name}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="application-detail({id:application.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="application.edit({id:application.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="application.delete({id:application.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
